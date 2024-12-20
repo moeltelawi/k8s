@@ -23,3 +23,4 @@ Steps to start:
     2-  $kubectl apply -f UI/ui-service.yaml 
     3-  $kubectl apply -f UI/ingress.yaml 
 
+6- Open your browser and enter the name from your /etc/hosts.
