@@ -1,0 +1,25 @@
+Hi,
+This App is used for getting the current weather status by entering the city name only EX: cairo
+---
+
+Steps to start:
+1- I'm using minikube to create k8s cluster and enabling ingress addon:
+    1- $minikube start
+    2- $minikube addons enable ingress
+2- add minikube IP to your /etc/hosts:
+    to get minikube IP: $minikube ip
+3- Start the authintecation service:
+    1-  $kubectl apply -f Auth-DB/secret.yaml 
+    2-  $kubectl apply -f Auth-DB/db-statefulset.yaml  
+    3-  $kubectl apply -f Auth-DB/headless-service.yaml 
+    make sure the statefulset runuing fine then run the job to create the required DB tables and make sure it's completed.
+        $kubectl apply -f Auth-DB/init-job.yaml
+4- Start the service that will communicate with the global Weather API:
+    1-  $kubectl apply -f Get-Weather/weather-secret.yaml
+    2-  $kubectl apply -f Get-Weather/weather-deployment.yaml 
+    3-  $kubectl apply -f Get-Weather/weather-service.yaml
+5- Start the service that will be your UI where you will enter the city name:
+    1-  $kubectl apply -f UI/ui-deployment.yaml 
+    2-  $kubectl apply -f UI/ui-service.yaml 
+    3-  $kubectl apply -f UI/ingress.yaml 
+
